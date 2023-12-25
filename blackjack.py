@@ -48,14 +48,16 @@ def display_game_state(player_deck, dealer_deck, reveal_dealer=False):
     if reveal_dealer:
         show_deck(dealer_deck)
     else:
-        print("X", dealer_deck[1])  # Show only the second card of the dealer
+        print(dealer_deck[0], "X")  # Show only the first card of the dealer
     print("\n")
 
 def hit(player_deck):
+    time.sleep(0.5)
     player_deck.append(cards.pop(random.randint(0, len(cards) - 1)))
 
 def stand(dealer_deck):
     while calculate_score(dealer_deck) < 17:
+        time.sleep(0.5)
         dealer_deck.append(cards.pop(random.randint(0, len(cards) - 1)))
 
 def blackjack():
@@ -116,6 +118,7 @@ def blackjack():
 
         # Display scores
         print("\nScores - Player Wins: {}, Dealer Wins: {}\n".format(player_wins, dealer_wins))
+        print("\nPlayer's Hand: {}, Dealer's Hand: {}\n".format(calculate_score(player_deck), calculate_score(dealer_deck)))
 
         # Ask if the player wants to play again
         play_again = input("Do you want to play again? (yes/no): ").lower()
@@ -124,4 +127,5 @@ def blackjack():
 
 if __name__ == "__main__":
     blackjack()
+
 
